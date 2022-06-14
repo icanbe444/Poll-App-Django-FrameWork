@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Django Python Online Exam</title>
+
+</head>
+
+<body>
+
+    <center>
+        <h1>Online exam dynamically from mysql</h1>
+        <h3>Python Django with Javascript & Jquery</h3>
+    </center>
+    <div style="padding-left: 30px;">
+        {% for result in Exam %}
+        <table>
+            <tr>
+                <td>{{result.id}} ) {{result.Question}}</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="option1" value="{{result.Option1}}">{{result.Option1}}</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="Option2" value="{{result.Option2}}">{{result.Option2}}</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="Option3" value="{{result.Option3}}">{{result.Option3}}</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="option4" value="{{result.Option4}}">{{result.Option4}}</td>
+            </tr>
+            <tr>
+                <td><label id="Correct_Answer">{{result.Correct_Answer}}</label></td>
+            </tr>
+        </table>
+        {% endfor %}
+        <hr/>
+        <input type="submit" value=" Click for Results" id="but1">
+    </div>
+
+
+
+</body>
+
+</html>
