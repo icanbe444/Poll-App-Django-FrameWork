@@ -5,40 +5,73 @@
 <head>
 
     <title>Django Python Online Exam</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#but1").click(function() {
+                $(".rb").show();
+                $(".rb").attr("disabled", true);
+            });
+
+        });
+
+        function getanswers() {
+            document.getElementById("UserAnswers").innerHTML = "";
+            var e = document.getElementsByTagName('input');
+            for (i = 0; i < e.length; i++) {
+
+                if (e[i].type == "radio") {
+                    if (e[i].checked) {
+                        document.getElementById("UserAnswers").innerHTML += "Q  " + e[i].name + "The answer you have selected is:  " + e[i].value + "<br/>";
+                    }
+                }
+
+            }
+
+
+
+        }
+    </script>
 
 </head>
 
 <body>
 
     <center>
-        <h1>Online exam dynamically from mysql</h1>
+        <h1>Online Exam (dynamically) from mysql</h1>
         <h3>Python Django with Javascript & Jquery</h3>
+        <h3>Designed by icanbe444</h3>
     </center>
     <div style="padding-left: 30px;">
         {% for result in Exam %}
+        <hr/>
         <table>
             <tr>
-                <td>{{result.id}} ) {{result.Question}}</td>
+                <td>({{result.id}}) {{result.Question}}</td>
             </tr>
             <tr>
-                <td><input type="radio" id="option1" value="{{result.Option1}}">{{result.Option1}}</td>
+                <td><input type="radio" id="option1" class="rb" name='{{result.id}}' value="{{result.Option1}}">{{result.Option1}}</td>
             </tr>
             <tr>
-                <td><input type="radio" id="Option2" value="{{result.Option2}}">{{result.Option2}}</td>
+                <td><input type="radio" id="Option2" class="rb" name='{{result.id}}' value="{{result.Option2}}">{{result.Option2}}</td>
             </tr>
             <tr>
-                <td><input type="radio" id="Option3" value="{{result.Option3}}">{{result.Option3}}</td>
+                <td><input type="radio" id="Option3" class="rb" name='{{result.id}}' value="{{result.Option3}}">{{result.Option3}}</td>
             </tr>
             <tr>
-                <td><input type="radio" id="option4" value="{{result.Option4}}">{{result.Option4}}</td>
+                <td><input type="radio" id="option4" class="rb" name='{{result.id}}' value="{{result.Option4}}">{{result.Option4}}</td>
             </tr>
             <tr>
-                <td><label id="Correct_Answer">{{result.Correct_Answer}}</label></td>
+                <td><label id="Correct_Answer" class="rb" style="display:none; color:rgb(42, 65, 7);"><b>The correct answer is      :{{result.Correct_Answer}}</b></label></td>
             </tr>
         </table>
         {% endfor %}
         <hr/>
-        <input type="submit" value=" Click for Results" id="but1">
+        <input type="submit" value=" Click for Results" id="but1" onclick="getanswers();" />
+        <br/>
+        <hr/>
+        <b id="UserAnswers"></b>
+
     </div>
 
 
